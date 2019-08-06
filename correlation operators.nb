@@ -1,0 +1,952 @@
+Notebook[{Cell[
+BoxData[StyleBox[RowBox[{"Title",":"," ",RowBox[{"Correlation"," ","Transformation"," ","operators"," ","in"," ","Reactive"," ",RowBox[
+{"Streams","."}]}]}],FontFamily -> "Droid Serif",FontSize -> 24,FontColor -> RGBColor[
+0.5215686274509804,0.11372549019607843,0.11372549019607843]]],"Input",ExpressionUUID -> "83670642-df01-4795-92c0-080dded59b8a"],Cell[
+BoxData[
+RowBox[{StyleBox[RowBox[{RowBox[{"Dr"," ","Bheemaiah"}],","," ",RowBox[{"Anil"," ","Kumar"}],","," ",RowBox[
+{"A",".","B"}]}],FontFamily -> "Bitstream Vera Sans Mono",FontColor -> RGBColor[0.5019607843137255,
+0,0.5019607843137255]],StyleBox[" ",FontFamily -> "Bitstream Vera Sans Mono",FontColor -> RGBColor[
+0.5019607843137255,0,0.5019607843137255]],"\n",StyleBox[RowBox[{"Seattle",RowBox[
+{" "," "}],RowBox[{"W",".","A"}],RowBox[{" "," "}],"98125"}],FontFamily -> "Bitstream Vera Sans Mono",
+FontColor -> RGBColor[0.5019607843137255,0,0.5019607843137255]],"\n",StyleBox[RowBox[
+{RowBox[{"bheemaiaha","@","yopmail"}],".","com"}],FontFamily -> "Bitstream Vera Sans Mono",
+FontColor -> RGBColor[0.5019607843137255,0,0.5019607843137255]]}]],"Input",ExpressionUUID -> "9f2d905f-7eff-4740-9e85-dfc6c18b2a03"],Cell[
+BoxData[
+RowBox[{RowBox[{StyleBox["Abstract",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[":",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],"\n",StyleBox[
+RowBox[{"This"," ","paper"," ","describes"," ","two"," ","operators"}],FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]]}],StyleBox[
+",",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],RowBox[{StyleBox[RowBox[
+{"autocorrelation"," ","and"," ","with"," ","transformational"," ",RowBox[{"A",".","I"}]," ","for"," ","an"," ","event"," ","and"," ","sensor"," ","streams"," ","in"," ","reactive"," ","object"}],
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox["-",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],RowBox[{StyleBox["oriented",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],RowBox[{StyleBox["programming",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[".",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],"\n",StyleBox["The",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]]}],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox["use",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[
+"of",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox["stream",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]]}],StyleBox[
+"-",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[RowBox[{"beans"," ","and"," ","event"}],FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[
+"-",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[RowBox[{"beans"," ","with"," ","multi"}],FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[
+"-",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[RowBox[{"sensor"," ","integration"," ","with"," ","application"," ","in"," ","robotics"," ","is"," ","illustrated"}],
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]]}],StyleBox[",",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],RowBox[
+{StyleBox["with",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,
+0.4588235294117647,0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[
+"use",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox["in",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox["SLAM",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[
+"and",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox["other",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox["semantic",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[
+"transfer",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox["functions",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox["with",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,0.0196078431372549]],StyleBox[
+"cloud",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],RowBox[{StyleBox["integration",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2549019607843137,0.4588235294117647,
+0.0196078431372549]],StyleBox[".",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.2549019607843137,0.4588235294117647,0.0196078431372549]],"\n"}]}]}]],"Input",ExpressionUUID -> "2f807c60-9bcb-4d4a-89f4-361acbe6f4a2"],Cell[
+BoxData[
+StyleBox[RowBox[{RowBox[{"Keywords",":"," ",RowBox[{"Correlation"," ","operators"}]}],","," ",RowBox[
+{"transformational"," ",RowBox[{"A",".","I"}]}],","," ",RowBox[{"Reactive"," ","Programming"}],","," ",RowBox[
+{"Correlation"," ","operators"}],","," ","EJBs",","," ",RowBox[{"automated"," ","persistence"}],","," ","RxJava",","," ","RxJS","\[NonBreakingSpace]"}],
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.2901960784313726,0.5647058823529412,
+0.8862745098039215]]],"Input",ExpressionUUID -> "3bf6e2dc-e9ed-4d3b-8fe1-c40302497d96"],Cell[
+BoxData[
+RowBox[{StyleBox[RowBox[{"What",":"," ",RowBox[{"Reactive"," ","Programming"," ","provides"," ","for"," ","the"," ","application"," ","of"," ","operators"," ","through"," ","iterators"," ","and"," ","the"," ","observer"," ","pattern"," ","on"," ",RowBox[
+{"streams","."," ","In"}]," ","a"," ","previous"," ","paper"," ",RowBox[{"(",RowBox[
+{"Bheemaiah"," ","2019"}],")"}],RowBox[{"(",RowBox[{"Bheemaiah"," ","2019"}],")"}]," ","we"," ","have"," ","extended"," ","automated"," ","persistence"," ","of"," ","java"," ","beans"," ","as"," ","EJBs"," ","to"," ","reactive"," ","programming"}]}],
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[",",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+RowBox[{RowBox[{"with"," ","the"," ","addition"," ","of"," ","event"}],"-",RowBox[
+{"beans"," ","and"," ","stream"}],"-","beans"}],FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[",",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],RowBox[{StyleBox[RowBox[{"we"," ","now"," ","extend"," ","the"," ","iterator"," ","methods"," ","on"," ","these"," ","beans"," ","with"," ","cross"}],
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["-",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[RowBox[{"correlation"," ","and"," ","auto"}],
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["-",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],RowBox[{StyleBox["correlation",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],RowBox[{StyleBox["functions",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[".",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],"\n",StyleBox["We",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]]}],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["illustrate",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["this",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["with",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"SLAM",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["algorithms",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["with",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["correlation",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"transformational",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+RowBox[{"A",".","I","."," ","We"}],FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"extend",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["the",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["SLAM",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"algorithms",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"to",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["auditory",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],RowBox[{StyleBox["localization",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[".",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],"\n",RowBox[{StyleBox[
+"How",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[":",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],RowBox[
+{StyleBox["We",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"define",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["a",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["transformational",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+RowBox[{"A",".","I"}],FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"based",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["system",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["of",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"correlation",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"algorithms",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"for",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["application",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["to",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["stream",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"beans",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["and",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["event",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],RowBox[
+{StyleBox["beans",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[".",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],"\n",StyleBox[
+"We",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]]}],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["define",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["its",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"functionality",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"in",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["SLAM",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["and",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"in",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["audio",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["stream",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"based",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["localization",
+FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["of",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["audio",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"sources",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]]}]}]}]}]}],StyleBox[",",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],RowBox[
+{StyleBox["both",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+"with",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox["or",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[
+" ",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,
+0.08627450980392157]],StyleBox["without",FontFamily -> "Droid Serif",FontColor -> RGBColor[
+0.09411764705882353,0.08627450980392157,0.08627450980392157]],StyleBox[" ",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],RowBox[
+{StyleBox["echos",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[".",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],"\n",RowBox[
+{StyleBox["Why",FontFamily -> "Droid Serif",FontColor -> RGBColor[0.09411764705882353,
+0.08627450980392157,0.08627450980392157]],StyleBox[":",FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]],"\n",StyleBox[
+RowBox[{RowBox[{"Simultaneous"," ","localization"," ","and"," ","mapping"," ","can"," ","be"," ","achieved"," ","through"," ","both"," ","visual"," ","and"," ","auditory"," ",RowBox[
+{"mechanisms","."," ","Localization"}]," ","is"," ","traditionally"," ","implied"," ","to"," ","mean"," ","the"," ","localization"," ","in"," ","absolute"," ","or"," ","relative"," ","coordinates"," ","with"," ","the"," ","creation"," ","of"," ","mapping"," ","and"," ","the"," ","additional"," ","determination"," ","of"," ","the"," ","pose"," ","of"," ","a"," ","camera"," ","for"," ","sensory"," ","input"," ","or"," ","a"," ","similar"," ","auditory"," ","localization"," ","as"," ","a"," ","pose"," ","in"," ","the"," ","case"," ","of"," ","lidar"," ","or"," ","ultrasound"," ","or"," ","audible"," ","range"," ",RowBox[
+{"sound","."," ","Localization"}]," ","of"," ","sound"," ","sources"," ","is"," ","an"," ","extension"," ","of"," ","correlation"}],"-",RowBox[
+{"based"," ","SLAM"," ",RowBox[{"algorithms","."}]}]}],FontFamily -> "Droid Serif",
+FontColor -> RGBColor[0.09411764705882353,0.08627450980392157,0.08627450980392157]]}]}]}]}]],
+"Input",ExpressionUUID -> "2b49eac9-40f7-4cac-b30d-d6d06468900d"],Cell[
+"\<Summary:\>",
+"Input",ExpressionUUID -> "214d5d52-bc97-4a74-b27b-778e072d51ed"],Cell[
+BoxData[RowBox[
+{RowBox[{RowBox[{RowBox[{"Main"," ",RowBox[{"Points",":","\n",RowBox[{"1.",StyleBox[
+"Existence",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["Theorem",
+FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["for",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["EventStream",FontWeight -> Plain],StyleBox[" ",
+FontWeight -> Plain],StyleBox["based",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"EventBean",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["from",
+FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["a",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["visual",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"stream",FontWeight -> Plain],StyleBox[RowBox[{" "," "}],FontWeight -> Plain],StyleBox[
+RowBox[{"\[GothicCapitalV]","and"}],FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"audio",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["stream",
+FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[RowBox[{"\[GothicCapitalA]","as"}],
+FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["a",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["stream",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"of",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["a",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["model",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"of",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["noise",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["or",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"a",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["semantic",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox[RowBox[{"event","."}],FontWeight -> Plain]}]}]}],"\n",StyleBox[
+"\[Rule]",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[RowBox[
+{":"," ",RowBox[{"\[Phi]"," ",RowBox[{"("," ",RowBox[{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}]}]}],
+FontWeight -> Plain]}],StyleBox[" ",FontWeight -> Plain],StyleBox[",",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox[RowBox[{RowBox[{"[",RowBox[{"\[DoubleLongLeftRightArrow]",RowBox[
+{",","\[DoubleRightArrow]"}]}],"]"}]," ","\[ShortRightArrow]"," ",RowBox[{"X",":",RowBox[
+{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}],FontWeight -> Plain]}],"\n",RowBox[
+{StyleBox[RowBox[{"where"," ",RowBox[{"x","\[UpArrow]"," ","is"}]," ","an"," ","arbitrary"," ","space"," ","tensor"," ","in"," ",RowBox[
+{"X",":"," ",RowBox[{"and"," ","t"," ","is"," ","time"}]}]}],FontWeight -> Plain],StyleBox[
+",",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[RowBox[{"in"," ","four"," ","dimensional"," ","space"," ","time"}],
+FontWeight -> Plain],StyleBox[",",FontWeight -> Plain],"\n",RowBox[{StyleBox[RowBox[
+{RowBox[{"\[DoubleLongLeftRightArrow]"," ","denotes"}]," ","a"," ","event"," ","tagged"," ","as"," ","noise"," ","and"}],
+FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["\[DoubleRightArrow]",
+FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],RowBox[{StyleBox["denotes",
+FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["a",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["semantic",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"transfer",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["to",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["a",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"model",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["or",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],RowBox[{StyleBox["ontology",FontWeight -> Plain],StyleBox[
+".",FontWeight -> Plain],"\n","2."}],StyleBox["Existence",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["of",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"a",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["Semantic",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["Model",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"for",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["Pose",FontWeight -> Plain]}]}],StyleBox[
+",",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["Localization",
+FontWeight -> Plain],StyleBox[",",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"Mapping",FontWeight -> Plain],StyleBox[",",FontWeight -> Plain],RowBox[{RowBox[{StyleBox[
+RowBox[{"and"," ","Localization"," ","of"," ","a"," ","audio"," ","source"," ","and"," ","n"," ","channel"," ",RowBox[
+{"reconstruction","."}]}],FontWeight -> Plain],"\n",StyleBox["\[RightArrow]",FontWeight -> Plain]}],StyleBox[
+":",FontWeight -> Plain],StyleBox[RowBox[{"\[ScriptCapitalP]"," ",RowBox[{"("," ",RowBox[
+{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}],RowBox[{" "," "}]}],FontWeight -> Plain]}],StyleBox[
+",",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[RowBox[{RowBox[
+{"[","\[DoubleRightArrow]","]"}],"\[ShortRightArrow]"," ",RowBox[{"X",":",RowBox[
+{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}],FontWeight -> Plain]}],"\n",StyleBox[
+RowBox[{RowBox[{"\[RightArrow]",RowBox[{":",RowBox[{"\[ScriptCapitalL]",RowBox[{"("," ",RowBox[
+{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}]}]}]}]," ",","," ",RowBox[{RowBox[
+{"[","\[DoubleRightArrow]","]"}],"\[ShortRightArrow]",RowBox[{"X",":"," ",RowBox[
+{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}]}],FontWeight -> Plain],"\n",StyleBox[
+RowBox[{RowBox[{"\[RightArrow]",RowBox[{":",RowBox[{"\[ScriptCapitalM]",RowBox[{"("," ",RowBox[
+{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}]}]}]}],","," ",RowBox[{RowBox[
+{"[","\[DoubleRightArrow]","]"}],"\[ShortRightArrow]",RowBox[{"X",":"," ",RowBox[
+{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}]}],FontWeight -> Plain],"\n",StyleBox[
+RowBox[{RowBox[{"\[RightArrow]",RowBox[{":",RowBox[{"Loc",RowBox[{"("," ",RowBox[
+{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}]}]}]}],","," ",RowBox[{RowBox[
+{"[","\[DoubleRightArrow]","]"}]," ","\[ShortRightArrow]",RowBox[{"X",":",RowBox[
+{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}]}],FontWeight -> Plain],"\n","\n",RowBox[
+{RowBox[{"3.",StyleBox["Definition",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"of",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["Semantic",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["transfer",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"models",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["and",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["illustration",FontWeight -> Plain],StyleBox[" ",
+FontWeight -> Plain],StyleBox["of",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"models",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["with",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["flex",FontWeight -> Plain]}],StyleBox["-",FontWeight -> Plain],StyleBox[
+RowBox[{"rule"," ","extraction"," ","and"," ","state"," ",RowBox[{"model","."}]}],
+FontWeight -> Plain]}]}]],"Input",ExpressionUUID -> "f7199ff2-b169-495e-8bb9-0714fb5f4dcd"],Cell[
+BoxData[
+RowBox[{RowBox[{"Applications",":","\n",RowBox[{"Possible"," ","applications"," ","include"}]}],","," ",RowBox[
+{"automation"," ","of"," ","rule"," ","extraction"," ","and"," ","automated"," ","model"," ","creation"}],","," ",RowBox[
+{"perception"," ","and"," ","cognition"," ","modeling"," ","and"," ","natural"," ","machine"," ","evolution"," ","in"," ","MFA"," ","II"," ",RowBox[
+{"architectures","."}]}]}]],"Input",ExpressionUUID -> "5d0b80ad-de38-457a-b7ac-a04c21b3b3d6"],Cell[
+BoxData[
+RowBox[{RowBox[{"Code"," ",RowBox[{"Base",":","https",":"}]}],"//",RowBox[{RowBox[
+{RowBox[{"github",".","com"}],"/","vedek"}],"/","correlationAI"}]}]],"Input",ExpressionUUID -> "a470e752-c30e-4618-b8bd-aef375d7d04d"],Cell[
+
+"\<\>","Input",ExpressionUUID -> "63d4ee9c-b416-44a4-ba9c-a910ad7e40df"],Cell[
+BoxData[
+RowBox[{RowBox[{RowBox[{RowBox[{"Introduction",".","\n","Problem"}]," ",RowBox[{"Definition",".","\n","Background","."}]}],"\n","\n","\n",StyleBox[
+"<",FontFamily -> "Bitstream Vera Sans Mono",FontColor -> RGBColor[1,0,0]],StyleBox[
+RowBox[{"original","-","contribution"}],FontFamily -> "Bitstream Vera Sans Mono",
+FontColor -> RGBColor[1,0,0]],StyleBox[">",FontFamily -> "Bitstream Vera Sans Mono",
+FontColor -> RGBColor[1,0,0]],"\n",RowBox[{"Formal"," ",RowBox[{"Definitions",":","\n","Axioms"}]}]}]," ","="," ",RowBox[
+{"{",RowBox[{RowBox[{"There"," ",RowBox[{"exist"," ",":","\n",RowBox[{"A"," ","video"," ","streambean"}]}]}]," ",","," ",RowBox[
+{"\[GothicCapitalV]","\n","Audio"," ","streambean"}],","," ",RowBox[{"\[GothicCapitalA]","\n","A"," ","events"," ","streambean"}],","," ",RowBox[
+{"\[GothicCapitalE]","\n","Transformational"," ",RowBox[{"A",".","I"}]," ","operators"," ","as"," ",RowBox[
+{"iterators",":","\n",RowBox[{"For"," ","SLAM"}],":"," ",RowBox[{"correlation"," ","operators"}]}]}],","," ",RowBox[
+{"autocorrelation"," ","A"}],","," ",RowBox[{"cross","-",RowBox[{"correlation"," ","CC"}]}],",","\n",RowBox[
+{RowBox[{"A",RowBox[{"(",RowBox[{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}]}]," ","\[Rule]"," ",RowBox[
+{RowBox[{"\[GothicCapitalE]","\n","CC",RowBox[{"(",RowBox[{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}]}]," ","\[Rule]"," ","\[GothicCapitalE]"}]}]}]}]}]],
+"Input",ExpressionUUID -> "eb652c81-0acc-442b-90d1-9df2bea73cfc"],Cell[
+BoxData[RowBox[
+{RowBox[{"SLAM",":","\[NonBreakingSpace]","\n",RowBox[{"Pose"," ","estimation"}],":","\n",RowBox[
+{"\[ScriptCapitalP]",RowBox[{"(","\[GothicCapitalV]",")"}]}]}],"\n",RowBox[{"Localization",":","\n",RowBox[
+{"\[ScriptCapitalL]",RowBox[{"(","\[GothicCapitalV]",")"}]}]}],"\n",RowBox[{RowBox[
+{"Mapping",":","\n",RowBox[{"\[ScriptCapitalM]",RowBox[{"(",RowBox[{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}]}]}]," ","\[Rule]"," ",RowBox[
+{"X",":",RowBox[{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}],"\n",RowBox[
+{RowBox[{"Localization"," ","of"," ",RowBox[{"Sound",":","\n",RowBox[{"Loc",RowBox[
+{"(","\[GothicCapitalA]",")"}]}]}]}]," ","\[Rule]","\[NonBreakingSpace] ",RowBox[
+{"X",":",RowBox[{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],","," ","t"}],")"}]}]}]}]],
+"Input",ExpressionUUID -> "8054414f-fa02-4a7e-8448-971846cf08fd"],Cell[
+"\<\>","Input",
+ExpressionUUID -> "73606e5b-58ed-48c9-b85c-9d5fca752546"],Cell[
+"\<
+}\>","Input",
+ExpressionUUID -> "0a5aed28-268a-44e3-afcf-745252ec1e8d"],Cell[
+"\<Theorems = {\>",
+"Input",ExpressionUUID -> "b1176bfe-6c1e-4f3a-8406-836f22bf5335"],Cell[
+BoxData[RowBox[
+{RowBox[{RowBox[{RowBox[{StyleBox[RowBox[{"Theorem"," ","1"}],FontFamily -> "Droid Serif",
+FontWeight -> Bold],StyleBox[":",FontFamily -> "Droid Serif",FontWeight -> Bold],"\n",StyleBox[
+RowBox[{"Correlation"," ","operators"}],FontFamily -> "Droid Serif"],StyleBox[":",
+FontFamily -> "Droid Serif"],"\n",RowBox[{StyleBox[RowBox[{"There"," ","exists"," ","a"," ","transformational"," ",RowBox[
+{"A",".","I"}]," ","based"," ","autocorrelation"," ","and"," ","cross"}],FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["-",FontFamily -> "Droid Serif",FontWeight -> Plain],RowBox[
+{StyleBox["correlation",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["operator",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"framework",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["for",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["the",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"creation",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["of",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["iterators",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"based",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["on",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["stream",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"inputs",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["and",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["time",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"based",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["and",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["space",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"based",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],RowBox[{StyleBox["correlations",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[".",FontFamily -> "Droid Serif",FontWeight -> Plain],"\n",StyleBox[
+"This",FontFamily -> "Droid Serif",FontWeight -> Plain]}],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["is",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["the",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"existence",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[RowBox[{"theorem","."}],FontFamily -> "Droid Serif",
+FontWeight -> Plain]}]}]}],"\n",StyleBox["\[Rule]",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[RowBox[{":"," ",RowBox[
+{"\[Phi]"," ",RowBox[{"("," ",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}],
+FontFamily -> "Droid Serif",FontWeight -> Plain]}],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[RowBox[{"[",RowBox[
+{"\[DoubleLongLeftRightArrow]",RowBox[{",","\[DoubleRightArrow]"}]}],"]"}],FontFamily -> "Droid Serif",
+FontWeight -> Plain]}],"\n",RowBox[{StyleBox[RowBox[{"where"," ",RowBox[{"x","\[UpArrow]"," ","is"}]," ","an"," ","arbitrary"," ","space"," ","tensor"," ","in"," ","X"," ","and"," ","t"," ","is"," ","time"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+RowBox[{"in"," ","four"," ","dimensional"," ","space"," ","time"}],FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",FontWeight -> Plain],"\n",RowBox[
+{StyleBox[RowBox[{RowBox[{"\[DoubleLongLeftRightArrow]"," ","denotes"}]," ","a"," ","event"," ","tagged"," ","as"," ","noise"," ","and"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["\[DoubleRightArrow]",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],RowBox[{StyleBox["denotes",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"a",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["semantic",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["transfer",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"to",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["a",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["model",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"or",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],RowBox[{StyleBox["ontology",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+".",FontFamily -> "Droid Serif",FontWeight -> Plain],"\n","\n",StyleBox["The",FontFamily -> "Droid Serif",
+FontWeight -> Plain]}],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"theorem",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["states",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["the",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"existence",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["of",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["a",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"correlation",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["model",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["for",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"a",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["model",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["creation",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"as",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["a",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["semantic",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"transfer",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["or",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["the",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"existence",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["of",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+RowBox[{"\[NonBreakingSpace]"," "}],FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"anoise",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["model",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["in",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"case",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["of",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["incomprehension",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"of",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["an",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["input",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],RowBox[
+{StyleBox["stream",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[".",
+FontFamily -> "Droid Serif",FontWeight -> Plain],"\n",StyleBox["For",FontFamily -> "Droid Serif",
+FontWeight -> Plain]}],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"vS",FontFamily -> "Droid Serif",FontWeight -> Plain]}]}],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"aS",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+RowBox[{"we"," ","define"," ","a"," ","stream"," ","fusion"," ","operator"," ",RowBox[
+{"\[OpenCurlyQuote]","+","\[CloseCurlyQuote]"}]}],FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+",",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[RowBox[{"defining"," ","O",RowBox[{"(",RowBox[{"vS"," ","+"," ","aS"}],")"}]," ","where"," ","O"," ","is"," ","an"," ","operator"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+RowBox[{"the"," ","existence"," ","theorum"," ","proves"}],FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",FontWeight -> Plain],"\n",StyleBox[
+RowBox[{RowBox[{"A",RowBox[{"(",RowBox[{"vS","+","aS"}],")"}]}]," ","\[Rule]","eventS"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+RowBox[{RowBox[{"where"," ","eventS"," ","is"," ","an"," ","eventBean"}]," ","="," ",RowBox[
+{"[",RowBox[{RowBox[{"noiseEvent","|","semanticEvent"}],","," ","."}],"]"}]}],FontFamily -> "Droid Serif",
+FontWeight -> Plain]}],"\n",RowBox[{StyleBox[RowBox[{RowBox[{"Where"," ","."," ","denotes"}]," ","a"," ","composition"," ","of"," ","one"," ","or"," ","more"," ","events"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],RowBox[
+{StyleBox["where",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["A",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["and",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"CC",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["define",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["correlations",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"in",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["time",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["and",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],RowBox[
+{StyleBox["space",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[".",FontFamily -> "Droid Serif",
+FontWeight -> Plain],"\n",StyleBox["We",FontFamily -> "Droid Serif",FontWeight -> Plain]}],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["apply",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"the",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["existence",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["theorem",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"to",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["SLAM",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["and",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"auditory",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[RowBox[{"localization","."}],FontFamily -> "Droid Serif",
+FontWeight -> Plain]}]}]}]],"Input",ExpressionUUID -> "f5d7501b-e439-447c-94cc-01775dd5c7f5"],Cell[
+BoxData[
+RowBox[{StyleBox[RowBox[{"We"," ","define"," ","the"," ","existence"," ","theorems"," ","for"," ","the"," ","operators"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+RowBox[{"Pose"," ","P"}],FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+",",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[RowBox[{"Localization"," ","L"}],FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[RowBox[{"Mapping"," ","M"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+RowBox[{"Localization"," ","of"," ","Sound"," ",RowBox[{"Loc","."," ","We"}]," ","prove"," ","the"," ","creation"," ","of"," ","event"," ","streams"," ","from"," ","the"," ","input"," ","streams"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+RowBox[{"pose"," ","as"," ","an"," ","event"}],FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+",",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[RowBox[{"localization"," ","as"," ","time"," ","events"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],RowBox[
+{StyleBox["created",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["with",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"the",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["spacial",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["mapper",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"the",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["X",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["server",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"inspired",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["by",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["the",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"X",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["server",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["of",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"project",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],RowBox[{StyleBox["Atena",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+".",FontFamily -> "Droid Serif",FontWeight -> Plain],"\n",StyleBox["Localization",
+FontFamily -> "Droid Serif",FontWeight -> Plain]}],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["is",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["also",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"described",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["by",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["a",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"similar",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["event",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["space",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"in",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["the",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["context",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"of",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["the",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["X",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+RowBox[{"server","."}],FontFamily -> "Droid Serif",FontWeight -> Plain]}]}]],"Input",
+ExpressionUUID -> "c600e087-32a3-4748-aef4-3d8d36b85efd"],Cell[
+BoxData[RowBox[{"\n",RowBox[
+{StyleBox[RowBox[{RowBox[{"\[RightArrow]",RowBox[{":",RowBox[{"\[ScriptCapitalP]"," ",RowBox[
+{"("," ",RowBox[{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}],RowBox[{" "," "}]}]}]}],","," ",RowBox[
+{RowBox[{"[","\[DoubleRightArrow]","]"}],"\[ShortRightArrow]"," ",RowBox[{"X",":",RowBox[
+{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}]}],FontFamily -> "Droid Serif",
+FontWeight -> Plain],"\n",StyleBox[RowBox[{RowBox[{"\[RightArrow]",RowBox[{":",RowBox[
+{"\[ScriptCapitalL]",RowBox[{"("," ",RowBox[{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}]}]}]}]," ",","," ",RowBox[
+{RowBox[{"[","\[DoubleRightArrow]","]"}],"\[ShortRightArrow]",RowBox[{"X",":"," ",RowBox[
+{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}]}],FontFamily -> "Droid Serif",
+FontWeight -> Plain],"\n",StyleBox[RowBox[{RowBox[{"\[RightArrow]",RowBox[{":",RowBox[
+{"\[ScriptCapitalM]",RowBox[{"("," ",RowBox[{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}]}]}]}],","," ",RowBox[
+{RowBox[{"[","\[DoubleRightArrow]","]"}],"\[ShortRightArrow]",RowBox[{"X",":"," ",RowBox[
+{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}]}],FontFamily -> "Droid Serif",
+FontWeight -> Plain],"\n",StyleBox[RowBox[{RowBox[{"\[RightArrow]",RowBox[{":",RowBox[
+{"Loc",RowBox[{"("," ",RowBox[{"\[GothicCapitalA]",",","\[GothicCapitalV]"}],")"}]}]}]}],","," ",RowBox[
+{RowBox[{"[","\[DoubleRightArrow]","]"}]," ","\[ShortRightArrow]",RowBox[{"X",":",RowBox[
+{"(",RowBox[{RowBox[{"x","\[UpArrow]"}],",","t"}],")"}]}]}]}],FontFamily -> "Droid Serif",
+FontWeight -> Plain],"\n"}]}]],"Input",ExpressionUUID -> "7f162f4b-067d-4f2b-8596-fc92459cbec5",
+CellFrame -> 1],Cell[
+BoxData[RowBox[{RowBox[{StyleBox[RowBox[{"Theorem"," ","2"}],
+FontFamily -> "Droid Serif"],StyleBox[":",FontFamily -> "Droid Serif"],"\n",StyleBox[
+RowBox[{RowBox[{"There"," ","always"," ","exists"," ","comprehension"," ","in"," ","a"," ","non"}],"-",RowBox[
+{"noise"," ","model"," ","for"," ","pose"," ","P"}]}],FontFamily -> "Droid Serif",
+FontWeight -> Plain]}],StyleBox[",",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"\[NonBreakingSpace]",FontFamily -> "Droid Serif",FontWeight -> Plain],"\n",RowBox[
+{RowBox[{StyleBox["The",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["proof",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"is",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],RowBox[{StyleBox["axiomatic",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+".",FontFamily -> "Droid Serif",FontWeight -> Plain],"\n",StyleBox["Theorem",FontFamily -> "Droid Serif"]}],StyleBox[
+" ",FontFamily -> "Droid Serif"],StyleBox["3",FontFamily -> "Droid Serif"]}],StyleBox[
+":",FontFamily -> "Droid Serif"],"\n",StyleBox[RowBox[{"There"," ","always"," ","exists"," ","a"," ","model"," ","for"," ","localization"," ","from"," ","input"," ","streams"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain]}],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],RowBox[
+{StyleBox["vS",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["and",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["aS",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"and",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["consequently",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["a",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"point",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["cloud",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["persistence",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"in",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["an",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["eventbean",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"in",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],RowBox[{StyleBox["X",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+".",FontFamily -> "Droid Serif",FontWeight -> Plain],"\n",StyleBox["Proof",FontFamily -> "Droid Serif",
+FontWeight -> Plain]}],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"is",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["axiomatic",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["in",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"the",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["existence",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["of",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"a",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["representation",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["of",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"a",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["point",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["cloud",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"as",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["event",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["space",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"in",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[RowBox[{"X","."}],FontFamily -> "Droid Serif",FontWeight -> Plain]}]}]],
+"Input",ExpressionUUID -> "cb154792-ec04-4a43-8c22-f62b5ced5851"],Cell[
+BoxData[StyleBox[
+RowBox[{RowBox[{RowBox[{RowBox[{"Theorem"," ","4"}],":",StyleBox[" ",FontWeight -> Plain],StyleBox[
+RowBox[{"Localization"," ","of"," ","sound"," ","and"," ","it"}],FontWeight -> Plain]}],StyleBox[
+"\[CloseCurlyQuote]",FontWeight -> Plain]}],StyleBox["s",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["inverse",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"the",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["creation",
+FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["of",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["360",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"sound",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["is",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["an",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"echo",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["problem",
+FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox["called",FontWeight -> Plain],StyleBox[
+" ",FontWeight -> Plain],StyleBox["the",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[
+"echo",FontWeight -> Plain],StyleBox[" ",FontWeight -> Plain],StyleBox[RowBox[{"theorem","."}],
+FontWeight -> Plain]}],FontFamily -> "Droid Serif"]],"Input",ExpressionUUID -> "5420667e-0c58-40ef-a6ed-0d5794a4aa8e"],Cell[
+BoxData[
+RowBox[{StyleBox[RowBox[{"The"," ","echo"," ","theorem"}],FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[RowBox[{"proves"," ","the"," ","localization"," ","of"," ","any"," ","auditory"," ","source"," ","in"," ","360"," ","space"," ","as"," ","an"," ","event"," ","space"," ","in"," ","X"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+RowBox[{"which"," ","can"," ","consist"," ","of"," ","both"," ","noise"," ","events"," ","and"," ","semantic"," ","events"}],
+FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[",",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],RowBox[
+{StyleBox["conversely",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["it",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"is",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["possible",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["for",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"every",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["event",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["of",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"localization",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["to",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["recreate",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"by",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["an",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["audio",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"tranducer",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["with",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["one",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"or",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["more",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["than",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"one",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["channels",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["the",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"semantic",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["or",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["noise",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"event",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["in",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["360",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],RowBox[
+{StyleBox["space",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[".",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["\[NonBreakingSpace]",FontFamily -> "Droid Serif",FontWeight -> Plain],"\n",StyleBox[
+"The",FontFamily -> "Droid Serif",FontWeight -> Plain]}],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["proof",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["of",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"the",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["recreation",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["is",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"in",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["the",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["existence",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"of",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["echo",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["based",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"sorround",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["channels",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["and",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"psychoacoustics",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["which",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["is",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"described",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox["in",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox["an",FontFamily -> "Droid Serif",
+FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+"accompanying",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[" ",FontFamily -> "Droid Serif",
+FontWeight -> Plain],RowBox[{StyleBox["paper",FontFamily -> "Droid Serif",FontWeight -> Plain],StyleBox[
+".",FontFamily -> "Droid Serif",FontWeight -> Plain],"\n"}]}]}]],"Input",ExpressionUUID -> "eed7bb14-cabc-4518-a77a-5e020bc628f1"],Cell[
+BoxData[
+RowBox[{"\n","\[NonBreakingSpace]","}"}]],"Input",ExpressionUUID -> "9c7d91b5-5c52-40e1-bc73-feebe51a756c"],Cell[
+BoxData[
+RowBox[{"\n","\n","\n","\n",RowBox[{StyleBox[RowBox[{"Story",":"," ",RowBox[{RowBox[
+{"The"," ","use"," ","of"," ","robotics"," ","in"," ","bottom"}],"-",RowBox[{"up"," ","validation"," ","and"," ","the"," ","replacement"," ","of"," ","animal"," ","models"}]}]}],
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[",",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox[RowBox[{"especially"," ","in"," ","vivo"," ","studies"," ","is"," ","illustrated"," ","in"," ","this"," ","paper"," ","with"," ","the"," ","use"," ","of"," ","correlation"," ","dynamics"," ","with"," ","model"," ","making"," ","as"," ","semantic"," ","transfer"," ","and"," ","the"," ","use"," ","of"," ","visual"," ","and"," ","audio"," ","sensor"," ","fusion"," ","as"," ","reactive"," ","programming"," ","for"," ","event"," ","streams"," ","illustrating"," ","correlation"," ","operators"," ","in"," ","visual"," ","and"," ","auditory"," ","sensor"," ",RowBox[
+{"fusion","."," ","Traditionally"}]," ","many"," ","animal"," ","lives"}],FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[",",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+RowBox[{"including"," ","adorable"," ","hamsters"," ","and"," ","appealing"," ","felines"}],
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[",",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],RowBox[{StyleBox["have",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"been",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["lost",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["in",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,
+1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"wasteful",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[RowBox[
+{"research","."," ","The"}],FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"following",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["paper",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox["addresses",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["the",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,
+1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"PETA",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["vs",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["the",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,
+1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"University",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["Of",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox["Wisconsin",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["Madison",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+RowBox[{"(",RowBox[{RowBox[{"\[OpenCurlyDoubleQuote]","Website","\[CloseCurlyDoubleQuote]"}]," ",RowBox[
+{"n",".","d","."}]}],")"}],FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox[RowBox[{"(",RowBox[{RowBox[{RowBox[{"\[OpenCurlyDoubleQuote]","Website","\[CloseCurlyDoubleQuote]"}]," ",RowBox[
+{"n",".","d","."}]}],";"," ",RowBox[{"Schneider"," ","2015"}]}],")"}],FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[RowBox[{"(",RowBox[{RowBox[{"\[OpenCurlyDoubleQuote]","Website","\[CloseCurlyDoubleQuote]"}]," ",RowBox[
+{"n",".","d","."}]}],")"}],FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox[RowBox[{"(",RowBox[{RowBox[{RowBox[{"\[OpenCurlyDoubleQuote]","Website","\[CloseCurlyDoubleQuote]"}]," ",RowBox[
+{"n",".","d","."}]}],";"," ",RowBox[{"Schneider"," ","2015"}]}],")"}],FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["case",FontFamily -> "Times New Roman",Background -> RGBColor[1,
+1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"on",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["the",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["details",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"of",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["cruel",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["and",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,
+1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"unnecessary",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["research",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox["on",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"cats",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["by",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["Prof",FontFamily -> "Times New Roman",Background -> RGBColor[1,
+1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],RowBox[
+{StyleBox["Yin",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+".",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],"\n",StyleBox[
+"Through",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]]}],StyleBox[
+" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["this",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox["paper",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]]}],StyleBox[",",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,
+1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+RowBox[{"the"," ","causal"," ","mind"," ","is"," ","defined"," ","as"," ","a"," ",RowBox[
+{RowBox[{"\[OpenCurlyDoubleQuote]",RowBox[{"foolish"," ","means"," ","of"," ","model"," ","creation"," ","by"," ","correlation"," ","dynamics"," ","of"," ","sensory"," ","data"}],"\[CloseCurlyDoubleQuote]"}],"."," ","This"}]," ","paper"," ","thus"," ","calls"," ","for"," ","the"," ","use"," ","of"," ","such"," ","robotics"," ","for"," ","the"," ","understanding"," ","of"," ","cognition"," ","and"," ","causal"," ","behavior"," ","rather"," ","than"," ","the"," ","need"," ","for"," ","animal"," ","models"," ","and"," ","wasteful"," ","experimental"," ",RowBox[
+{"research","."}]}],FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]]}]}]],
+"Input",ExpressionUUID -> "b81a16ff-5ba9-4274-8bfd-19a149b03080",CellFrame -> 0],Cell[
+BoxData[
+RowBox[{RowBox[{RowBox[{RowBox[{StyleBox[RowBox[{RowBox[{RowBox[{RowBox[{RowBox[{RowBox[
+{RowBox[{RowBox[{"Neurolink"," ","and"," ","the"," ","dangerous"," ","Borg"," ",RowBox[
+{"Metaphor",".",RowBox[{"(",RowBox[{"Captain"," ","Picard"}]}]}]}],"\[CloseCurlyQuote]"}],"s"," ","Emotional"," ","Collapse"," ","2013"}],")"}],RowBox[
+{"(",RowBox[{"Captain"," ","Picard"}]}]}],"\[CloseCurlyQuote]"}],"s"," ","Emotional"," ","Collapse"," ","2013"}],")"}],
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["\[NonBreakingSpace]",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],"\n",RowBox[{StyleBox[
+"PETA",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["has",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["led",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,
+1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"an",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["international",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox["movement",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["against",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"the",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["use",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["of",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,
+1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"nanoprobes",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["and",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox["implants",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["in",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,
+1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+"animals",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["and",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],RowBox[{StyleBox["humans",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[".",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],"\n",StyleBox["Experiments",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]]}],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,
+1]],StyleBox["like",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+" ",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["Neuralink",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]]}]}],StyleBox["\[CloseCurlyQuote]",
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]]}],StyleBox["s",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[" ",FontFamily -> "Times New Roman",Background -> RGBColor[
+1,1,1]],StyleBox["Brain",FontFamily -> "Times New Roman",Background -> RGBColor[1,
+1,1]]}],StyleBox["-",FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox[
+RowBox[{"Computer"," ","Interfaces"," ","have"," ","led"," ","to"," ","the"," ","emergence"," ","of"," ","a"," ","dangerous"," ","Borg"}],
+FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]],StyleBox["-",FontFamily -> "Times New Roman",
+Background -> RGBColor[1,1,1]],StyleBox[RowBox[{"like"," ","race"," ","with"," ","dangerous"," ",RowBox[
+{"transhumanism","."," ","Wearables"}]," ","are"," ","a"," ","more"," ","ethical"," ","alternative"," ","to"," ","avoid"," ","an"," ","attack"," ","of"," ","a"," ","technology"," ","stealing"," ","Borg"," ","invasion"," ","either"," ","by"," ","viruses"," ","or"," ","by"," ","the"," ","sudden"," ","appearance"," ","of"," ","invading"," ",RowBox[
+{"Borgs","."}]}],FontFamily -> "Times New Roman",Background -> RGBColor[1,1,1]]}]],
+"Input",ExpressionUUID -> "359f9fb2-9e43-4807-98d1-9c0e17efe48b",CellFrame -> 0,CellDingbat -> None,
+TextAlignment -> Left,TextJustification -> 1],Cell[
+BoxData[RowBox[{RowBox[{StyleBox[
+"<",FontFamily -> "Bitstream Vera Sans Mono",FontColor -> RGBColor[1,0,0]],StyleBox[
+RowBox[{RowBox[{"/","original"}],"-","contribution"}],FontFamily -> "Bitstream Vera Sans Mono",
+FontColor -> RGBColor[1,0,0]],StyleBox[">",FontFamily -> "Bitstream Vera Sans Mono",
+FontColor -> RGBColor[1,0,0]],"\n","\n",RowBox[{RowBox[{"Discussion",".","\n","We"}]," ","have"," ","thus"," ","described"," ","the"," ","existence"," ","of"," ","transformational"," ",RowBox[
+{"A",".","I"}]," ","for"," ","event"," ","stream"," ","creation"," ","from"," ","input"," ","streams"}]}],","," ",RowBox[
+{"illustrated"," ","with"," ","SLAM"," ","based"," ","and"," ","echo"," ","localization"," ","and"," ",RowBox[
+{"recreation",".","\n","noise"}]," ","or"," ","semantic"," ","models"," ","are"," ","reviewed"," ","with"," ","rule"," ","extraction"," ","networks"," ","and"," ","state"," ","models"," ","for"," ","comprehension"," ","of"," ","input"," ",RowBox[
+{"streams",".","\n","\n","Future"}]," ",RowBox[{"Work",".","\n","In"}]," ","future"," ","papers"}],","," ",RowBox[
+{"we"," ","explore"," ","other"," ","models"," ","of"," ",RowBox[{"semantics","."}]}]}]],
+"Input",ExpressionUUID -> "8c1b377e-e5bc-4ae0-aeae-724d0d415128"],Cell[
+"\<\>","Input",
+ExpressionUUID -> "a52d9f04-4235-4202-812f-bfbff9a13159"]},StyleDefinitions -> "Default.nb",
+FrontEndVersion -> "12. for Wolfram Cloud 1.51 (August 2, 2019)"]
